@@ -27,7 +27,7 @@ person_table = sqlalchemy.Table(
     sqlalchemy.Column("unzr", sqlalchemy.String(128), unique=True, nullable=False),
 )
 
-#Модель даних використовується для валідації даних що прийшли с запитом
+#Модель даних використовується для валідації даних що прийшли з запитом
 class PersonMainModel(BaseModel):
     name: str = Field(min_length=1, max_length=128)
     surname: str = Field( min_length=1, max_length=128)
@@ -73,7 +73,7 @@ class PersonMainModel(BaseModel):
         # Удаляем все символы "-" из строки для проверки цифр и длины
         digits_only = value.replace('-', '')
 
-        if digits_only and (not digits_only.isdigit() or len(digits_only) != 14):
+        if digits_only and (not digits_only.isdigit() or len(digits_only) != 13):
             raise ValueError('UNZR must be a 14 digit number')
         return value
 
@@ -91,11 +91,11 @@ class PersonDelete(BaseModel):
 
     @validator('unzr')
     def validate_unzr(cls, value):
-        # Удаляем все символы "-" из строки для проверки цифр и длины
+        # Видаляємо всі символи "-" з рядка для перевірки цифр и довжини рядка
         digits_only = value.replace('-', '')
 
-        if digits_only and (not digits_only.isdigit() or len(digits_only) != 14):
-            raise ValueError('UNZR must be a 14 digit number')
+        if digits_only and (not digits_only.isdigit() or len(digits_only) != 13):
+            raise ValueError('UNZR must be a 13 digit number')
         return value
 
 
